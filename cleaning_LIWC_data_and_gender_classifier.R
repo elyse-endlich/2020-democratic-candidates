@@ -13,7 +13,6 @@ LIWC$YEAR <- gsub(".*([0-9]{4}).*", "\\1", LIWC$Filename)
 LIWC$MONTH <- gsub(".*_(\\w+)_MERGE.TXT", "\\1", LIWC$Filename)
 
 
-
 ## year candidate entered politics -----------------------------------------
 
 LIWC$FIRST_YEAR <- LIWC$CANDIDATE
@@ -141,9 +140,11 @@ table(LIWC.2$CANDIDATE) / table(LIWC$CANDIDATE) # how many times each candidate 
 
 LIWC.2[, "FEMININE"] <- "NA"
 LIWC.2[, "MASCULINE"] <- "NA"
+
 feminine_function.2 <- function(x) {
   sum(LIWC.2$pronoun[x], LIWC.2$ipron[x], LIWC.2$auxverb[x], LIWC.2$verb[x], LIWC.2$posemo[x], LIWC.2$negemo[x], LIWC.2$social[x], LIWC.2$cogproc[x], LIWC.2$tentat[x])
 }
+
 masculine_function.2 <- function(x) {
   sum(LIWC.2$Sixltr[x], LIWC.2$we[x], LIWC.2$article[x], LIWC.2$prep[x], LIWC.2$anger[x], LIWC.2$swear[x])
 }
@@ -167,21 +168,98 @@ LIWC.2$RATIO.2 <- LIWC.2$FEMININE.2 / LIWC.2$MASCULINE.2
 # dat.model.2 <- lm(formula = as.formula(paste(colnames(LIWC.2)[102], "~", paste(colnames(LIWC.2)[c(4:83)], collapse = "+"), sep = "")), data = LIWC.2)
 # step(dat.model.2, direction = "both")
 
-my.model.MIO <- lm(formula = MONTHS_IN_OFFICE ~ Analytic + Authentic + Tone +
-  WPS + Dic + ppron + i + we + you + they + ipron + article +
-  prep + auxverb + adverb + conj + negate + interrog + quant +
-  affect + posemo + social + family + friend + female + male +
-  insight + cause + discrep + differ + percept + see + feel +
-  bio + sexual + affiliation + focusfuture + leisure + relig +
-  death + informal + netspeak + assent + drives, data = LIWC.2) # so this model was trained on a smaller data set and is now being applied to the bigger data set
+my.model.MIO <- lm(formula = MONTHS_IN_OFFICE ~ Analytic +
+  Authentic +
+  Tone +
+  WPS +
+  Dic +
+  ppron +
+  i +
+  we +
+  you +
+  they +
+  ipron +
+  article +
+  prep +
+  auxverb +
+  adverb +
+  conj +
+  negate +
+  interrog +
+  quant +
+  affect +
+  posemo +
+  social +
+  family +
+  friend +
+  female +
+  male +
+  insight +
+  cause +
+  discrep +
+  differ +
+  percept +
+  see +
+  feel +
+  bio +
+  sexual +
+  affiliation +
+  focusfuture +
+  leisure +
+  relig +
+  death +
+  informal +
+  netspeak +
+  assent +
+  drives, data = LIWC.2) # so this model was trained on a smaller data set and is now being applied to the bigger data set
 
-my.model2.MIO <- lm(formula = MONTHS_IN_OFFICE ~ Analytic + Authentic + Tone +
-  WPS + Dic + ppron + i + we + you + they + ipron + article +
-  prep + auxverb + adverb + conj + negate + interrog + quant +
-  affect + posemo + social + family + friend + female + male +
-  insight + cause + discrep + differ + percept + see + feel +
-  bio + sexual + affiliation + focusfuture + leisure + relig +
-  death + informal + netspeak + assent + drives + AGE + SEX + RACE, data = LIWC.2) # same model just including age, sex, and race
+my.model2.MIO <- lm(formula = MONTHS_IN_OFFICE ~ Analytic +
+  Authentic +
+  Tone +
+  WPS +
+  Dic +
+  ppron +
+  i +
+  we +
+  you +
+  they +
+  ipron +
+  article +
+  prep +
+  auxverb +
+  adverb +
+  conj +
+  negate +
+  interrog +
+  quant +
+  affect +
+  posemo +
+  social +
+  family +
+  friend +
+  female +
+  male +
+  insight +
+  cause +
+  discrep +
+  differ +
+  percept +
+  see +
+  feel +
+  bio +
+  sexual +
+  affiliation +
+  focusfuture +
+  leisure +
+  relig +
+  death +
+  informal +
+  netspeak +
+  assent +
+  drives +
+  AGE +
+  SEX +
+  RACE, data = LIWC.2) # same model just including age, sex, and race
 
 # shipan's model -----------------------------------------
 
@@ -189,32 +267,151 @@ shipans.model.MIO.2 <- lm(MONTHS_IN_OFFICE ~ RATIO.2, data = LIWC.2)
 
 shipans.model2.MIO.2 <- lm(MONTHS_IN_OFFICE ~ RATIO.2 + AGE + SEX + RACE, data = LIWC.2)
 
-my.model.MIO.2 <- lm(formula = MONTHS_IN_OFFICE ~ Analytic + Clout + Authentic +
-  Tone + WPS + Sixltr + Dic + pronoun + ppron + i + we + you +
-  they + ipron + article + prep + auxverb + adverb + conj +
-  negate + verb + adj + compare + interrog + number + quant +
-  affect + posemo + negemo + anx + anger + sad + social + family +
-  friend + female + male + cogproc + insight + cause + discrep +
-  tentat + certain + differ + percept + see + hear + feel +
-  bio + health + sexual + ingest + drives + affiliation + achieve +
-  power + reward + risk + focusfuture + relativ + space + time +
-  leisure + home + relig + death + informal + netspeak + assent +
+my.model.MIO.2 <- lm(formula = MONTHS_IN_OFFICE ~ Analytic +
+  Clout +
+  Authentic +
+  Tone +
+  WPS +
+  Sixltr +
+  Dic +
+  pronoun +
+  ppron +
+  i +
+  we +
+  you +
+  they +
+  ipron +
+  article +
+  prep +
+  auxverb +
+  adverb +
+  conj +
+  negate +
+  verb +
+  adj +
+  compare +
+  interrog +
+  number +
+  quant +
+  affect +
+  posemo +
+  negemo +
+  anx +
+  anger +
+  sad +
+  social +
+  family +
+  friend +
+  female +
+  male +
+  cogproc +
+  insight +
+  cause +
+  discrep +
+  tentat +
+  certain +
+  differ +
+  percept +
+  see +
+  hear +
+  feel +
+  bio +
+  health +
+  sexual +
+  ingest +
+  drives +
+  affiliation +
+  achieve +
+  power +
+  reward +
+  risk +
+  focusfuture +
+  relativ +
+  space +
+  time +
+  leisure +
+  home +
+  relig +
+  death +
+  informal +
+  netspeak +
+  assent +
   nonflu, data = LIWC.2)
 
 
-my.model2.MIO.2 <- lm(formula = MONTHS_IN_OFFICE ~ Analytic + Clout + Authentic +
-  Tone + WPS + Sixltr + Dic + pronoun + ppron + i + we + you +
-  they + ipron + article + prep + auxverb + adverb + conj +
-  negate + verb + adj + compare + interrog + number + quant +
-  affect + posemo + negemo + anx + anger + sad + social + family +
-  friend + female + male + cogproc + insight + cause + discrep +
-  tentat + certain + differ + percept + see + hear + feel +
-  bio + health + sexual + ingest + drives + affiliation + achieve +
-  power + reward + risk + focusfuture + relativ + space + time +
-  leisure + home + relig + death + informal + netspeak + assent +
-  nonflu + AGE + SEX + RACE, data = LIWC.2)
-
-
+my.model2.MIO.2 <- lm(formula = MONTHS_IN_OFFICE ~ Analytic +
+  Clout +
+  Authentic +
+  Tone +
+  WPS +
+  Sixltr +
+  Dic +
+  pronoun +
+  ppron +
+  i +
+  we +
+  you +
+  they +
+  ipron +
+  article +
+  prep +
+  auxverb +
+  adverb +
+  conj +
+  negate +
+  verb +
+  adj +
+  compare +
+  interrog +
+  number +
+  quant +
+  affect +
+  posemo +
+  negemo +
+  anx +
+  anger +
+  sad +
+  social +
+  family +
+  friend +
+  female +
+  male +
+  cogproc +
+  insight +
+  cause +
+  discrep +
+  tentat +
+  certain +
+  differ +
+  percept +
+  see +
+  hear +
+  feel +
+  bio +
+  health +
+  sexual +
+  ingest +
+  drives +
+  affiliation +
+  achieve +
+  power +
+  reward +
+  risk +
+  focusfuture +
+  relativ +
+  space +
+  time +
+  leisure +
+  home +
+  relig +
+  death +
+  informal +
+  netspeak +
+  assent +
+  nonflu +
+  AGE +
+  SEX +
+  RACE, data = LIWC.2)
 
 
 LIWC.2$predict.MIO <- predict(my.model.MIO, LIWC.2)
@@ -250,26 +447,125 @@ female.model.ship.2 <- lm(SEX == "FEMALE" ~ RATIO.2, data = LIWC.2)
 
 ##
 
-my.male.model <- lm(formula = SEX == "MALE" ~ Clout + Authentic + Tone + Sixltr +
-  function. + pronoun + ppron + you + shehe + they + prep +
-  adverb + conj + number + quant + posemo + negemo + anger +
-  family + friend + female + insight + tentat + certain + differ +
-  percept + feel + bio + body + health + ingest + drives +
-  affiliation + achieve + power + reward + risk + work + leisure +
-  home + relig + informal + swear + netspeak + assent + nonflu +
+my.male.model <- lm(formula = SEX == "MALE" ~ Clout +
+  Authentic +
+  Tone +
+  Sixltr +
+  function. +
+  pronoun +
+  ppron +
+  you +
+  shehe +
+  they +
+  prep +
+  adverb +
+  conj +
+  number +
+  quant +
+  posemo +
+  negemo +
+  anger +
+  family +
+  friend +
+  female +
+  insight +
+  tentat +
+  certain +
+  differ +
+  percept +
+  feel +
+  bio +
+  body +
+  health +
+  ingest +
+  drives +
+  affiliation +
+  achieve +
+  power +
+  reward +
+  risk +
+  work +
+  leisure +
+  home +
+  relig +
+  informal +
+  swear +
+  netspeak +
+  assent +
+  nonflu +
   filler, data = LIWC.2)
 
-my.male.model.2 <- lm(formula = SEX == "MALE" ~ Clout + Authentic + Tone + WPS +
-  Sixltr + function. + pronoun + we + you + shehe + they +
-  ipron + article + prep + adverb + conj + verb + adj + interrog +
-  number + quant + affect + posemo + negemo + anx + anger +
-  sad + social + family + friend + female + male + cogproc +
-  insight + cause + discrep + tentat + certain + differ + percept +
-  hear + feel + bio + body + health + sexual + ingest + drives +
-  affiliation + achieve + power + reward + risk + focuspast +
-  focuspresent + focusfuture + relativ + motion + space + time +
-  work + leisure + home + money + relig + informal + swear +
-  netspeak + assent + nonflu + filler, data = LIWC.2)
+my.male.model.2 <- lm(formula = SEX == "MALE" ~ Clout +
+  Authentic +
+  Tone +
+  WPS +
+  Sixltr +
+  function. +
+  pronoun +
+  we +
+  you +
+  shehe +
+  they +
+  ipron +
+  article +
+  prep +
+  adverb +
+  conj +
+  verb +
+  adj +
+  interrog +
+  number +
+  quant +
+  affect +
+  posemo +
+  negemo +
+  anx +
+  anger +
+  sad +
+  social +
+  family +
+  friend +
+  female +
+  male +
+  cogproc +
+  insight +
+  cause +
+  discrep +
+  tentat +
+  certain +
+  differ +
+  percept +
+  hear +
+  feel +
+  bio +
+  body +
+  health +
+  sexual +
+  ingest +
+  drives +
+  affiliation +
+  achieve +
+  power +
+  reward +
+  risk +
+  focuspast +
+  focuspresent +
+  focusfuture +
+  relativ +
+  motion +
+  space +
+  time +
+  work +
+  leisure +
+  home +
+  money +
+  relig +
+  informal +
+  swear +
+  netspeak +
+  assent +
+  nonflu +
+  filler, data = LIWC.2)
 
 
 ## now female using old data set  -----------------------------------------
@@ -282,26 +578,125 @@ my.male.model.2 <- lm(formula = SEX == "MALE" ~ Clout + Authentic + Tone + WPS +
 # dat.model3.2 <- lm(formula = as.formula(paste('SEX == "FEMALE" ~ ', paste(colnames(LIWC.2)[c(4:83)], collapse = "+"), sep = "")), data = LIWC.2)
 # step(dat.model3.2, direction = "both")
 
-my.female.model <- lm(formula = SEX == "FEMALE" ~ Clout + Authentic + Tone + Sixltr +
-  function. + pronoun + ppron + you + shehe + they + prep +
-  adverb + conj + number + quant + posemo + negemo + anger +
-  family + friend + female + insight + tentat + certain + differ +
-  percept + feel + bio + body + health + ingest + drives +
-  affiliation + achieve + power + reward + risk + work + leisure +
-  home + relig + informal + swear + netspeak + assent + nonflu +
+my.female.model <- lm(formula = SEX == "FEMALE" ~ Clout +
+  Authentic +
+  Tone +
+  Sixltr +
+  function. +
+  pronoun +
+  ppron +
+  you +
+  shehe +
+  they +
+  prep +
+  adverb +
+  conj +
+  number +
+  quant +
+  posemo +
+  negemo +
+  anger +
+  family +
+  friend +
+  female +
+  insight +
+  tentat +
+  certain +
+  differ +
+  percept +
+  feel +
+  bio +
+  body +
+  health +
+  ingest +
+  drives +
+  affiliation +
+  achieve +
+  power +
+  reward +
+  risk +
+  work +
+  leisure +
+  home +
+  relig +
+  informal +
+  swear +
+  netspeak +
+  assent +
+  nonflu +
   filler, data = LIWC.2)
 
-my.female.model.2 <- lm(formula = SEX == "FEMALE" ~ Clout + Authentic + Tone + WPS +
-  Sixltr + function. + pronoun + we + you + shehe + they +
-  ipron + article + prep + adverb + conj + verb + adj + interrog +
-  number + quant + affect + posemo + negemo + anx + anger +
-  sad + social + family + friend + female + male + cogproc +
-  insight + cause + discrep + tentat + certain + differ + percept +
-  hear + feel + bio + body + health + sexual + ingest + drives +
-  affiliation + achieve + power + reward + risk + focuspast +
-  focuspresent + focusfuture + relativ + motion + space + time +
-  work + leisure + home + money + relig + informal + swear +
-  netspeak + assent + nonflu + filler, data = LIWC.2)
+my.female.model.2 <- lm(formula = SEX == "FEMALE" ~ Clout +
+  Authentic +
+  Tone +
+  WPS +
+  Sixltr +
+  function. +
+  pronoun +
+  we +
+  you +
+  shehe +
+  they +
+  ipron +
+  article +
+  prep +
+  adverb +
+  conj +
+  verb +
+  adj +
+  interrog +
+  number +
+  quant +
+  affect +
+  posemo +
+  negemo +
+  anx +
+  anger +
+  sad +
+  social +
+  family +
+  friend +
+  female +
+  male +
+  cogproc +
+  insight +
+  cause +
+  discrep +
+  tentat +
+  certain +
+  differ +
+  percept +
+  hear +
+  feel +
+  bio +
+  body +
+  health +
+  sexual +
+  ingest +
+  drives +
+  affiliation +
+  achieve +
+  power +
+  reward +
+  risk +
+  focuspast +
+  focuspresent +
+  focusfuture +
+  relativ +
+  motion +
+  space +
+  time +
+  work +
+  leisure +
+  home +
+  money +
+  relig +
+  informal +
+  swear +
+  netspeak +
+  assent +
+  nonflu +
+  filler, data = LIWC.2)
 
 
 LIWC.2$predict.MALE <- predict(my.male.model, LIWC.2)
@@ -534,9 +929,6 @@ summary(LIWC.2$predict.RESULT.2)
 
 # take time now to write down what I've done
 # outline, bulleted, capture project knowledge
-
-
-
 
 
 # ## making a new ratio?? ## ignore this, it's under construction
