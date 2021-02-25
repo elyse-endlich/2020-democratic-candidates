@@ -1,0 +1,16 @@
+for candidate in `find * -maxdepth 0 -type d`
+do
+  cd ${candidate}/"Just Facts"
+  for year in `find * -maxdepth 0 -type d`
+  do
+    cd ${year}
+    for month in `find * -maxdepth 0 -type d | tr ' ' '_'`
+    do
+        cd "`echo $month | tr '_' ' '`"
+        find *-out.txt -type f -execdir cat {} + >> "$candidate"_Just_Facts_"$year"_"$month"_MERGE.TXT
+        cd ..
+    done
+    cd ..
+  done
+  cd ../..
+done

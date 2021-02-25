@@ -1,0 +1,28 @@
+anyconnect.pomona.edu
+
+
+tr -d '\t\n\r\f\v' < 'Warren, Just Facts, April 11, 2019.txt' | sed -r 's/[A-Z]{2,}:/\n&/g' |  egrep "^?*WARREN"  
+for file in /Warren/*; do tr -d '\t\n\r\f\v' "$file" | sed -r 's/[A-Z]{2,}:/\n&/g' |  egrep "^?*WARREN" > "out_$file" ; done 
+for f in Warren/*.txt; do tr -d "\t\n\r\f\v" < "$f" | sed -r 's/[A-Z]{2,}:/\n&/g' |  egrep -i "^?*warren?*:.*$" > "$f"-out.txt; done
+for f in Warren/*.txt; do tr -d "\t\n\r\f\v" < "$f" > "$f"-out.txt; done
+
+for f in Warren/*.txt; do tr -d "\t\n\r\f\v" < "$f" | sed -r 's/[A-Z]{2,}:/\n&/g' |  egrep "^.*WARREN:" > out-"$f"; done
+
+for f in Warren/*.txt; do tr -s "\t\n\r\f\v" " " < "$f" | sed -r 's/[A-Z]{2,}:/\n&/g'| sed -r 's/([A-Z]\w+ )*([A-Z]\w+:)/\n&/g' |  egrep -i "^.*WARREN:" > "$f"-out.txt; done 
+
+###
+for f in Warren/MSNBC/*.txt; do tr -s "\t\n\r\f\v" " " < "$f" | sed -r 's/([A-Z]\w+ )*([A-Z]\w+:)/\n&/g' |  egrep -i "^.*Warren:" > "$f"-out.txt; done
+###
+
+for f in Sanders/MSNBC/*.txt; do tr -s "\t\n\r\f\v" " " < "$f" | sed -r 's/([A-Z]\w+ )*([A-Z]\w+:)/\n&/g' |  egrep -i "^.*Sanders:" > "$f"-out.txt; done
+
+###
+for f in Trump/*.txt; do tr -s "\t\n\r\f\v" " " < "$f" | sed -r 's/([A-Z]\w+ )*([A-Z]\w+:)/\n&/g' |  egrep -i "^.*(Trump|President):" > "$f"-out.txt; done
+###
+tr -s "\t\n\r\f\v" " " < 'Warren, Just Facts, May 16, 2019.txt' | sed -r 's/([A-Z][^ :]* )*[A-Z][^ :]*:/\n&/g' |  egrep -i "^.*WARREN[^ ]*( [A-Z][^ :]*)*:" > 'Warren, Just Facts, May 16, 2019.txt-out.txt'
+
+for f in Trump/*.txt; do tr -d "\t\n\r\f\v" < "$f" | sed -r 's/[A-Z]{2,}:/\n&/g' |  egrep -i "^?*TRUMP:" > "$f"-out.txt; done
+
+clean data, get sense for volume and diachronic spread
+run one for trump - done!
+do same for msnbc

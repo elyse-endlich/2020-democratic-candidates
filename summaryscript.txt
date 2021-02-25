@@ -1,0 +1,20 @@
+for candidate in `find * -maxdepth 0 -type d`
+do
+  cd ${candidate}
+  cd "Just Facts"
+  for year in `find * -maxdepth 2 -mindepth 2 -type d`
+  do
+    cd ${year}
+    for month in `find * -maxdepth 3 -mindepth 3 -type d`
+    do
+      cd ${month}
+      for file in `find ${month} -name "*-out.txt" -type f`
+      do
+        cat $file >> "$candidate"_Just_Facts_"$year"_"$month"_MERGE.TXT
+      done
+      cd ..
+    done
+    cd ..
+  done
+  cd ../..
+done
