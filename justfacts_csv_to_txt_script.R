@@ -20,6 +20,7 @@ trump.remarks.gov <- read.csv(file = "trump_remarks_gov.csv", header = T)
 byebyecolumns <- function(x) {
   x[, c("link", "text", "date")]
 }
+
 warren.justfacts.interviews <- byebyecolumns(warren.justfacts.interviews)
 sanders.justfacts.interviews <- byebyecolumns(sanders.justfacts.interviews)
 biden.justfacts.interviews <- byebyecolumns(biden.justfacts.interviews)
@@ -119,6 +120,7 @@ harris.transcripts.msnbc <- read.csv(file = "harris_transcripts_msnbc.csv", head
 byebyecolumns <- function(x) {
   x[, c("link", "transcript", "date", "guests")]
 }
+
 warren.transcripts.msnbc <- byebyecolumns(warren.transcripts.msnbc)
 sanders.transcripts.msnbc <- byebyecolumns(sanders.transcripts.msnbc)
 biden.transcripts.msnbc <- byebyecolumns(biden.transcripts.msnbc)
@@ -131,20 +133,21 @@ harris.transcripts.msnbc <- byebyecolumns(harris.transcripts.msnbc)
 byebyecolumns <- function(x) {
   x[, c("title", "date", "transcript")]
 }
+
 trump.remarks.gov <- byebyecolumns(trump.remarks.gov)
 
 # Now we need to remove data that doesn't have the candidates as guests -----------------------------------------
 
-warren.transcripts.msnbc.subset <- warren.transcripts.msnbc[grep("Elizabeth Warren", warren.transcripts.msnbc$guests), ]
-bennet.transcripts.msnbc.subset <- bennet.transcripts.msnbc[grep("Michael Bennet", bennet.transcripts.msnbc$guests), ]
-biden.transcripts.msnbc.subset <- biden.transcripts.msnbc[grep("Joe Biden", biden.transcripts.msnbc$guests), ]
-booker.transcripts.msnbc.subset <- booker.transcripts.msnbc[grep("Cory Booker", booker.transcripts.msnbc$guests), ]
-gabbard.transcripts.msnbc.subset <- gabbard.transcripts.msnbc[grep("Tulsi Gabbard", gabbard.transcripts.msnbc$guests), ]
-harris.transcripts.msnbc.subset <- harris.transcripts.msnbc[grep("Kamala Harris", harris.transcripts.msnbc$guests), ]
-klobuchar.transcripts.msnbc.subset <- klobuchar.transcripts.msnbc[grep("Amy Klobuchar", klobuchar.transcripts.msnbc$guests), ]
-sanders.transcripts.msnbc.subset <- sanders.transcripts.msnbc[grep("Bernie Sanders", sanders.transcripts.msnbc$guests), ]
+warren.transcripts.msnbc.subset <- warren.transcripts.msnbc[grep("Elizabeth Warren", warren.transcripts.msnbc$guests),]
+bennet.transcripts.msnbc.subset <- bennet.transcripts.msnbc[grep("Michael Bennet", bennet.transcripts.msnbc$guests),]
+biden.transcripts.msnbc.subset <- biden.transcripts.msnbc[grep("Joe Biden", biden.transcripts.msnbc$guests),]
+booker.transcripts.msnbc.subset <- booker.transcripts.msnbc[grep("Cory Booker", booker.transcripts.msnbc$guests),]
+gabbard.transcripts.msnbc.subset <- gabbard.transcripts.msnbc[grep("Tulsi Gabbard", gabbard.transcripts.msnbc$guests),]
+harris.transcripts.msnbc.subset <- harris.transcripts.msnbc[grep("Kamala Harris", harris.transcripts.msnbc$guests),]
+klobuchar.transcripts.msnbc.subset <- klobuchar.transcripts.msnbc[grep("Amy Klobuchar", klobuchar.transcripts.msnbc$guests),]
+sanders.transcripts.msnbc.subset <- sanders.transcripts.msnbc[grep("Bernie Sanders", sanders.transcripts.msnbc$guests),]
 
-trump.remarks.gov.subset <- trump.remarks.gov[grep("Trump", trump.remarks.gov$title), ]
+trump.remarks.gov.subset <- trump.remarks.gov[grep("Trump", trump.remarks.gov$title),]
 
 warren.transcripts.msnbc.subset$date <- gsub("[[:punct:]]", "-", warren.transcripts.msnbc.subset$date)
 bennet.transcripts.msnbc.subset$date <- gsub("[[:punct:]]", "-", bennet.transcripts.msnbc.subset$date)
